@@ -381,6 +381,8 @@ static int ch36x_mmio_read(int type, void __iomem *addr, unsigned long ch36x_arg
 	int retval = 0;
 	u32 ioval;
 
+	printk(KERN_ERR "%s-%d,addr:0x%lx,type:%d",__FUNCTION__,__LINE__,addr,type);
+	
 	switch (type) {
 	case SIZE_BYTE:
 		ioval = ioread8(addr);

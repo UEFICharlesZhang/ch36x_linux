@@ -423,6 +423,7 @@ int ch36x_read_mem_dword(int fd, unsigned long memaddr, uint32_t *odword)
 	
 	ch36x_read_mem_t.memaddr = memaddr;
 	ch36x_read_mem_t.odword = odword;
+	printf("%s-%d,addr:0x%lx\n", __FUNCTION__,__LINE__,ch36x_read_mem_t.memaddr);
 
 	return ioctl(fd, CH36x_READ_MEM_DWORD, (unsigned long)&ch36x_read_mem_t);
 }
