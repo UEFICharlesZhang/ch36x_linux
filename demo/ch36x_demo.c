@@ -142,12 +142,12 @@ static void ch36x_demo_dio_operate(void)
 			ch36x_read_io_byte(fd, iobase + 0xF8, &temp);
 			ch36x_write_io_byte(fd, iobase + 0xF8, (temp & 0xfe) | ((mOffset & 0x8000) > 15));
 			//Set A0~A14
-			ret = ch36x_read_mem_dword(fd, membase + mOffset&ValidAddr, &ibyte);
+			ret = ch36x_read_mem_dword(fd, membase+(mOffset&ValidAddr), &ibyte);
 			if (ret != 0)
 				printf("memory write fail.\n");
 			break;
 		case 'r':
-			ret = ch36x_read_mem_dword(fd, membase + mOffset&ValidAddr, &obyte);
+			ret = ch36x_read_mem_dword(fd,( membase+(mOffset&ValidAddr)), &obyte);
 			if (ret != 0)
 				printf("memory read fail.\n");
 			printf("read byte: 0x%2x\n", obyte);
@@ -183,10 +183,10 @@ static void ch36x_demo_48do_operate(void)
 		}
 		//set a15 first
 		ch36x_read_io_byte(fd,iobase+0xF8,&ibyte);
-		ch36x_write_io_byte(fd,iobase+0xF8,(ibyte&0xfe)|((obyte&0x8000)>15));
+		ch36x_write_io_byte(fd,iobase+0xF8,(ibyte&0xfe)|((obyte&0x8000)>>15));
 
 		//set A0~A14 and D0~D31
-		ret = ch36x_write_mem_dword(fd, membase + (uint32_t)(obyte&ValidAddr), (uint32_t)((obyte&0xffffffff0000)>16));
+		ret = ch36x_write_mem_dword(fd, membase + (uint32_t)(obyte&ValidAddr), (uint32_t)((obyte&0xffffffff0000)>>16));
 		if (ret != 0)
 			printf("memory write fail.\n");
 	}
