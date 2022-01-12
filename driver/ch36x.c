@@ -773,7 +773,7 @@ static int ch36x_fops_ioctl_do(struct ch36x_dev *ch36x_dev, unsigned int cmd,
 		break;
 	case CH36x_READ_IO_BYTE:
 		get_user(arg1, (long __user *)ch36x_arg);
-		get_user(arg2, ((long __user *)ch36x_arg + 1));
+		get_user(arg2, ((uint8_t __user *)ch36x_arg + 1));
 		retval = ch36x_io_read(SIZE_BYTE, arg1, arg2);
 		break;
 	case CH36x_READ_IO_WORD:
