@@ -400,7 +400,7 @@ int ch36x_read_mem_word(int fd, unsigned long memaddr, uint16_t *oword)
 		uint16_t *oword;
 	} ch36x_read_mem_t;
 	
-	ch36x_read_mem_t.memaddr = memaddr;
+	ch36x_read_mem_t.memaddr = memaddr&&0xfffffffffffffffc;
 	ch36x_read_mem_t.oword = oword;
 
 	return ioctl(fd, CH36x_READ_MEM_WORD, (unsigned long)&ch36x_read_mem_t);
@@ -421,7 +421,7 @@ int ch36x_read_mem_dword(int fd, unsigned long memaddr, uint32_t *odword)
 		uint32_t *odword;
 	} ch36x_read_mem_t;
 	
-	ch36x_read_mem_t.memaddr = memaddr;
+	ch36x_read_mem_t.memaddr = memaddr&0xfffffffffffffffc;
 	ch36x_read_mem_t.odword = odword;
 	printf("%s-%d,addr:0x%lx\n", __FUNCTION__,__LINE__,ch36x_read_mem_t.memaddr);
 
